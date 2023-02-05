@@ -21,17 +21,7 @@ const BlogDetail = () => {
     }
   }, [firebase.bdata]);
 
-  const handleLike = () => {
-    if (count === 0) {
-      setLike(like + 1);
-      setCount(count+1)
-    }
-    if(count==1){
-      setCount(count-1);
-      setLike(like-1)
-    }
-    
-  };
+ 
 
   return (
     <div>
@@ -83,14 +73,7 @@ const BlogDetail = () => {
         <Typography variant="h5" sx={{ paddingTop: "10px", marginTop: "20px" }}>
           {firebase.bdata?.displayName}
         </Typography>
-        <Button
-          variant="success"
-          style={{ padding: "10px", margin: "20px", backgroundColor: "green" }}
-          onClick={handleLike}
-        >
-          Like {like}
-        </Button>{" "}
-    
+
       </p>
     </div>
   );
