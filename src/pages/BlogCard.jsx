@@ -29,7 +29,7 @@ const BlogCard = (props) => {
             onClick={() => navigate(props.link)}
           >
             <span className="buy" style={{ bottom: "10px" }}>
-              View
+              {props.link === `/yourblogs/blog/${props.id}` ? 'View Stats' : 'View'} 
             </span>
           </button>
         </center>

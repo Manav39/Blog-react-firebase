@@ -3,7 +3,12 @@ import Avatar from "@mui/material/Avatar";
 import { useFirebase } from "../context/Firebase";
 import { useParams } from "react-router-dom";
 import { Typography } from "@mui/material";
+import { Button } from "react-bootstrap";
+import { ElevatorSharp } from "@mui/icons-material";
+
 const BlogDetail = () => {
+  const [count,setCount] = useState(0);
+  const [like, setLike] = useState(5);
   const firebase = useFirebase();
   const params = useParams();
   const [url, setUrl] = useState(null);
@@ -15,7 +20,19 @@ const BlogDetail = () => {
       firebase.getImageURL(firebase.bdata?.imageURL).then((url) => setUrl(url));
     }
   }, [firebase.bdata]);
-  console.log("url", firebase.bdata?.photoURL);
+
+  const handleLike = () => {
+    if (count === 0) {
+      setLike(like + 1);
+      setCount(count+1)
+    }
+    if(count==1){
+      setCount(count-1);
+      setLike(like-1)
+    }
+    
+  };
+
   return (
     <div>
       <img
@@ -60,12 +77,20 @@ const BlogDetail = () => {
         <Avatar
           alt="Remy Sharp"
           src={firebase.bdata?.photoURL}
-          sx={{ width: 56, height: 56 }}
+          sx={{ width: 56, height: 56, marginTop: "15px" }}
         />
         &nbsp;&nbsp;
-        <Typography variant="h5" sx={{ paddingTop: "10px" }}>
+        <Typography variant="h5" sx={{ paddingTop: "10px", marginTop: "20px" }}>
           {firebase.bdata?.displayName}
         </Typography>
+        <Button
+          variant="success"
+          style={{ padding: "10px", margin: "20px", backgroundColor: "green" }}
+          onClick={handleLike}
+        >
+          Like {like}
+        </Button>{" "}
+    
       </p>
     </div>
   );

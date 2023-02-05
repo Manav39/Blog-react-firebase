@@ -95,6 +95,8 @@ export const FirebaseProvider = (props) => {
       displayName: user.displayName === null ? user.email : user.displayName,
       photoURL: user.photoURL === null ? url : user.photoURL,
     });
+
+    
   };
 
   const AllBlogs = () => {
@@ -119,6 +121,16 @@ export const FirebaseProvider = (props) => {
     return result;
   }
 
+
+  const AddLike = async(blogId,likes) =>{
+    const collectionRef = collection(firestore,"blogs",blogId,"likes");
+    const result = addDoc(collectionRef,{
+      likes:Number(likes)
+    })
+    console.log(result);
+  }
+
+
   const isLoggedIn = user ? true : false;
   return (
     <FirebaseContext.Provider
@@ -134,7 +146,8 @@ export const FirebaseProvider = (props) => {
         getImageURL,
         getBlogById,
         bdata,
-        getSingleUserBlogs
+        getSingleUserBlogs,
+        AddLike
       }}
     >
       {props.children}

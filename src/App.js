@@ -11,6 +11,7 @@ import {useFirebase} from './context/Firebase';
 import ErrorPage from './pages/ErrorPage';
 import BlogDetail from './pages/BlogDetail';
 import BlogCard from './pages/BlogCard';
+import BlogStat from './pages/BlogStat';
 function App() {
   const firebase = useFirebase();
 
@@ -23,7 +24,7 @@ function App() {
         <Route path='/explore' element={<Explore/>}/>
         <Route path='/createblog' element={<CreateBlog/>}/>
         <Route path='/yourblogs' element={<YourBlogs/>}/>
-        <Route path='/yourblogs/blog/:blogId' element={<BlogDetail/>}/>
+        <Route path='/yourblogs/blog/:blogId' element={<BlogStat/>}/>
         <Route path='/explore/blog/:blogId' element={<BlogDetail />}/>
         {!firebase.isLoggedIn && <Route path='/register' element={<Register/>}/>}
         <Route path="*" element={<ErrorPage/>}/> 
